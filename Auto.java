@@ -4,9 +4,10 @@ public class Auto extends Veicolo {
 	private int frizione;
 	private static final int MaxFrizione = 10;
 	
-	public Auto( int acceleratore, int freno, int frizione) {
+	
+	public Auto( int acceleratore, int freno, String marca, String modello, int frizione) {
 		
-		super(acceleratore, freno);
+		super(acceleratore, freno, marca, modello);
 		this.frizione = frizione;
 		
 		
@@ -25,7 +26,7 @@ public class Auto extends Veicolo {
 		if (this.getFreno() == 0) {
 			int m = MaxFrizione;
 			int a = super.getAcceleratore();
-			System.out.println("Sto partendo");
+			System.out.println("Sto partendo \n");
 			
 			while (frizione != m & a != 10) {
 				
@@ -38,10 +39,5 @@ public class Auto extends Veicolo {
 			
 			System.out.println("Il freno è abbassato");
 		}
-	}
-
-	@Override
-	public String toString() {
-		return super.toString() + " " + frizione + " " + MaxFrizione ;
-	}
+	}	
 }
