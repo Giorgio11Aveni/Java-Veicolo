@@ -127,35 +127,39 @@ public class Auto {
 
 	public void Partenza() {
 		
+		this.frizione = MaxFrizione;
 		
-		if (this.getFreno() == MinFreno) {
+		if (this.freno == MinFreno && this.frizione == MaxFrizione) {
 			this.marciaInnestata = marce[0];
+
 
 		}else{
 			
-			System.out.println("Il freno è abbassato");
+			System.out.println("Il freno è abbassato oppure devi abbassare la frizione per inserire la marcia");
 		}
+	
+		
+		if (marciaInnestata == "prima") {
+				
+				
+			System.out.println("Sto partendo... \n");
 			
-			if (marciaInnestata == "prima") {
+			while (acceleratore != 7) {
 				
-				int mf = MaxFrizione;
-				int ma = MaxAcceleratore;
-			
-			int a = getAcceleratore();
-			System.out.println("Sto partendo \n");
-			
-			while (frizione != mf) {
+				//this.frizione = MaxFrizione;
 				
+				this.acceleratore ++; 
 				
-				a++; 
-				mf--;
+				Ritardo(10);
 				
-				if (a == 7) {
-				cambioMarce();
+				this.frizione --;
+				
+				if (this.acceleratore == 7) {
+				CambioMarce();
 				}
-				System.out.println("Valore frizione" + " : " + mf + "         Valore acceleratore" + " : " +a+ "            Valore freno: "+ this.getFreno()+"             Marcia Innestata: "+this.marciaInnestata );
-				
-			}
+				System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore: " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
+			}	
+			
 		}else{
 			
 			System.out.println("Non hai messo la marcia");
@@ -164,18 +168,53 @@ public class Auto {
 	}
 	
 
-	public void cambioMarce() {
+	public void CambioMarce() {
 			
+		
+		this.frizione = MaxFrizione;
+		this.acceleratore = MinAcceleratore;
 		System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore" + " : " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
+		
 			
-			for (int i = 0; i<5; i++) {
+		for ( int i=0; i<5; i++) {
+			
 					
 				this.marciaInnestata = marce[i+1];
-				System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore" + " : " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
-				this.acceleratore++;
-				this.frizione--;
-			}			
+				System.out.println("Cambio marcia... \n" + "Valore frizione" + " : " + this.frizione + "         Valore acceleratore" + " : " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
+				Cammina();
+			}
 	}
+		
+	
+	
+	public String Cammina () {
+		
+		while (acceleratore != 7) {
+			
+			//this.frizione = MaxFrizione;
+			
+			this.acceleratore ++; 
+			
+			Ritardo(10);
+			
+			this.frizione --;
+			
+			System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore: " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
+		
+			
+			if (this.acceleratore == 7) {
+			CambioMarce();
+			System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore: " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
+			
+			
+			
+			}else{
+		
+		
+	} 
+	}
+		return this.marciaInnestata;
+}
 }
 
 
