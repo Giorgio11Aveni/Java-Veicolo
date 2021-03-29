@@ -1,19 +1,29 @@
-
+import java.util.*;
 public class Auto {
 
-	private int frizione;
+	//DICHIARAZIONE COSTANTI
+	
 	private static final int MaxFrizione = 10;
 	private static final int MaxAcceleratore = 10;
 	private static final int MinFreno = 0;
 	private static final int MinAcceleratore = 0;
 	private static final int MinFrizione = 0;
-	private static final String marce[] = {"prima", "seconda", "terza", "quarta", "quinta", "retromarcia" };
+	
+	//DICHIARAZIONE VARIABILI
+	
+	private int frizione;
 	private String marciaInnestata;
 	private int freno;
 	private int acceleratore;
 	private String marca;
 	private String modello;
+	private  static  final  String marce [] = { "prima" , " seconda " , " terza " , " quarta " , " quinta " , " retromarcia " };
+	private int n_marcia;
+	//DICHIRARAZIONE MAPPA PER LE MARCE
 	
+	//TreeMap<Integer,String> marcia = new TreeMap<Integer,String>();
+	
+	//COSTRUTTORE
 	
 	public Auto( int acceleratore, int freno, String marca, String modello, int frizione, String marciaInnestasta) {
 		
@@ -22,9 +32,15 @@ public class Auto {
 		this.frizione = frizione;
 		this.marca = marca;
 		this.modello = modello;
-		this.marciaInnestata = marciaInnestata;
-		
-		
+		/*this.marciaInnestata = marciaInnestata;
+		this.marcia.put(0, "Folle");
+		this.marcia.put(1, "Prima");
+		this.marcia.put(2, "Seconda");
+		this.marcia.put(3, "Terza");
+		this.marcia.put(4, "Quarta");
+		this.marcia.put(5, "Quinta");
+		this.marcia.put(6, "Retromarcia");
+		*/
 	}
 	
 	
@@ -130,7 +146,7 @@ public class Auto {
 		this.frizione = MaxFrizione;
 		
 		if (this.freno == MinFreno && this.frizione == MaxFrizione) {
-			this.marciaInnestata = marce[0];
+			this.marciaInnestata = this.marce[0];
 
 
 		}else{
@@ -146,26 +162,27 @@ public class Auto {
 			
 			while (acceleratore != 7) {
 				
-				//this.frizione = MaxFrizione;
-				
 				this.acceleratore ++; 
 				
 				Ritardo(10);
 				
 				this.frizione --;
 				
+				System.out.println( "Valore frizione" + " : " + this.frizione + "         Valore acceleratore" + " : " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
+
+				
 				if (this.acceleratore == 7) {
 				CambioMarce();
 				}
-				System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore: " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
-			}	
 			
-		}else{
-			
-			System.out.println("Non hai messo la marcia");
 		}
 		
+	}else{
+		
+		System.out.println("Non hai messo la marcia");
+		
 	}
+}	
 	
 
 	public void CambioMarce() {
@@ -173,21 +190,29 @@ public class Auto {
 		
 		this.frizione = MaxFrizione;
 		this.acceleratore = MinAcceleratore;
-		System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore" + " : " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
+		System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore" + " : " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata   ); 
 		
-			
-		for ( int i=0; i<5; i++) {
-			
+		
+		 for(int i = 0; i<6; i++){
+				if (n_marcia == i) {
+					this.marciaInnestata = this.marce[i+1];
+					this.n_marcia++;
+					System.out.println("Cambio marcia... \n" + "Valore frizione" + " : " + this.frizione + "         Valore acceleratore" + " : " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
+					Cammina();
 					
-				this.marciaInnestata = marce[i+1];
-				System.out.println("Cambio marcia... \n" + "Valore frizione" + " : " + this.frizione + "         Valore acceleratore" + " : " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
-				Cammina();
+			}else{
+				
+				//this.marciaInnestata = this.marce[i+1];
+			}
+				
+				
+				
 			}
 	}
 		
 	
 	
-	public String Cammina () {
+	public int Cammina () {
 		
 		while (acceleratore != 7) {
 			
@@ -203,7 +228,10 @@ public class Auto {
 		
 			
 			if (this.acceleratore == 7) {
-			CambioMarce();
+				
+				CambioMarce();
+				//this.n_marcia++;
+				
 			System.out.println("Valore frizione" + " : " + this.frizione + "         Valore acceleratore: " +this.acceleratore+ "            Valore freno: "+ this.freno+"             Marcia Innestata: "+this.marciaInnestata );
 			
 			
@@ -213,7 +241,7 @@ public class Auto {
 		
 	} 
 	}
-		return this.marciaInnestata;
+		return n_marcia;
 }
 }
 
